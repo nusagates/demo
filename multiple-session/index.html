@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Demo Multiple Session</title>
+    <script src="http://nusagates.com/demo/js/jQuery-2.1.4.min.js"></script>
+  </head>
+  <body>
+    <script>
+      $(function(){
+        $.ajax({
+          url: "data.php?session1=1",
+          success: function(data){
+            alert(data);
+            $.ajax({
+              url: "data.php?session2=1",
+              success: function(data){
+                alert(data);
+                $.ajax({
+                  url: "data.php?session3=1",
+                  success: function(data){
+                    alert(data);
+                  },
+                  error: function(data){
+                    alert("error "+data.responseText);
+                  }
+                });
+              },
+              error: function(data){
+                alert("error "+data.responseText);
+              }
+            });
+          },
+          error: function(data){
+            alert("error "+data.responseText);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
